@@ -17,6 +17,7 @@ By using this technology stack we are aiming to learn following:
 ## How to get started?
 - Execute shell script to start both Grafana and Prometheus.
 - Execute `docker inspect <Prometheus container name or ID> | grep IPAddress` and note down IP address
+- Prometheus is available at http://localhost:9090/
 - Grafana can be accessed on http://localhost:3000/
     - credentials
         - user name: admin
@@ -55,4 +56,3 @@ kubernetes-monitoring   Active   3s
 ```
 - We have a docker compose file but Kubernetes does not understand this file. Since we are new to Kubernetes and don't know yet how to create a Kubernetes specific YAML file, for time being we will use Kompose tool to convert our `docker-compose.yaml` file to the format which Kubernetes understands.
     - `brew install kompose`
-    
