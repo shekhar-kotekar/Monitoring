@@ -53,3 +53,6 @@ kube-public             Active   55d
 kube-system             Active   55d
 kubernetes-monitoring   Active   3s
 ```
+- We have a docker compose file but Kubernetes does not understand this file. Since we are new to Kubernetes and don't know yet how to create a Kubernetes specific YAML file, for time being we will use Kompose tool to convert our `docker-compose.yaml` file to the format which Kubernetes understands.
+    - `brew install kompose`
+    
