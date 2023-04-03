@@ -29,3 +29,27 @@ By using this technology stack we are aiming to learn following:
 - Execute `kubectl config use-context docker-desktop` command where
     - `docker-desktop` is the name of the context which is installed by Docker Desktop
 - All the Kubernetes contexts can be listed by executing `kubectl config view | more` command
+
+## How to monitor local Kubernetes cluster using Prometheus and Grafana?
+- Get the list of existing namespaces in Kubernetes
+```
+$ kubectl get namespaces
+NAME              STATUS   AGE
+default           Active   55d
+kube-node-lease   Active   55d
+kube-public       Active   55d
+kube-system       Active   55d
+```
+- Now we have to create a new namespace to reserve a separate place for Grafana and Prometheus
+```
+$ kubectl create namespace kubernetes-monitoring
+namespace/kubernetes-monitoring created
+
+$ kubectl get namespaces                        
+NAME                    STATUS   AGE
+default                 Active   55d
+kube-node-lease         Active   55d
+kube-public             Active   55d
+kube-system             Active   55d
+kubernetes-monitoring   Active   3s
+```
