@@ -9,10 +9,10 @@ Technologies which we are planning to use are:
 
 
 By using this technology stack we are aiming to learn following:
-    - Rust programming
-    - Adding application monitoring code
-    - Create beautiful dashboards to view application performance
-    - Observe and compare RedPanda / Kafka performance under different load
+- Rust programming
+- Adding application monitoring code
+- Create beautiful dashboards to view application performance
+- Observe and compare RedPanda / Kafka performance under different load
 
 ## How to get started?
 - Execute shell script to start both Grafana and Prometheus.
