@@ -7,6 +7,7 @@ Technologies which we are planning to use are:
 - Spark, Kafka Streams and Apache Ballista / Data Fusion to process data
 - Rust to read network packets and send this data to Kafka / RedPanda
 
+
 By using this technology stack we are aiming to learn following:
     - Rust programming
     - Adding application monitoring code
