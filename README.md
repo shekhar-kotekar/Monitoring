@@ -41,6 +41,7 @@ kube-node-lease   Active   55d
 kube-public       Active   55d
 kube-system       Active   55d
 ```
+
 - Now we have to create a new namespace to reserve a separate place for Grafana and Prometheus
 ```
 $ kubectl create namespace kubernetes-monitoring
@@ -54,5 +55,21 @@ kube-public             Active   55d
 kube-system             Active   55d
 kubernetes-monitoring   Active   3s
 ```
-- We have a docker compose file but Kubernetes does not understand this file. Since we are new to Kubernetes and don't know yet how to create a Kubernetes specific YAML file, for time being we will use Kompose tool to convert our `docker-compose.yaml` file to the format which Kubernetes understands.
-    - `brew install kompose`
+
+## How to start Prometheus and Grafana in local Kubernetes cluster?
+```
+# We will use readymade Helm charts for Prometheus and Grafana to save some time AND
+# because we are new to Kubernetes, Grafana, Prometheus and many other technologies.
+
+# Execute below commands:
+
+# Add and install / update Prometheus Helm chart 
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install prometheus prometheus-community/prometheus
+
+
+# Get the Prometheus server URL by running these commands in the same shell:
+export POD_NAME=$(kubectl get pods --namespace default -l "app=prometheus,component=server" -o jsonpath="{.items[0].metadata.name}")
+kubectl --namespace default port-forward $POD_NAME 9090
+```
