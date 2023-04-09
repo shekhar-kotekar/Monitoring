@@ -10,6 +10,7 @@ Technologies which we are planning to use are:
 ## Roadmap
 - Decide on which data sources we are going to use
     - Ideally we should have some streaming data source and some batch mode
+    - Example: Network packet capture for streaming data
 - Install dockerized version of technologies as needed
 - Make sure that each technology (Kafka, RedPanda, Spark) can be monitored using Prometheus and Grafana
 - Write Data Engineering pipeline(s) to process data
@@ -22,6 +23,7 @@ By using this technology stack we are aiming to learn following:
 - Adding application monitoring code
 - Create beautiful dashboards to view application performance
 - Observe and compare RedPanda / Kafka performance under different load
+- Security of docker, kubernetes
 
 ## How to use Kubernetes installed in local (using Docker Desktop)?
 - Execute `kubectl config use-context docker-desktop` command where
