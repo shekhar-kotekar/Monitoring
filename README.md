@@ -56,13 +56,11 @@ kube-system             Active   55d
 kubernetes-monitoring   Active   3s
 ```
 
-## How to start Prometheus and Grafana in local Kubernetes cluster?
+We will use readymade Helm charts for Prometheus and Grafana to save some time AND
+because we are new to Kubernetes, Grafana, Prometheus and many other technologies.
+
+## How to start Prometheus in local Kubernetes cluster?
 ```
-# We will use readymade Helm charts for Prometheus and Grafana to save some time AND
-# because we are new to Kubernetes, Grafana, Prometheus and many other technologies.
-
-# Execute below commands:
-
 # Add and install / update Prometheus Helm chart 
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
@@ -73,3 +71,33 @@ helm install prometheus prometheus-community/prometheus
 export POD_NAME=$(kubectl get pods --namespace default -l "app=prometheus,component=server" -o jsonpath="{.items[0].metadata.name}")
 kubectl --namespace default port-forward $POD_NAME 9090
 ```
+
+## How to start Grafana in local Kubernetes cluster?
+```
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+helm install my-release grafana/grafana
+
+# Get your 'admin' user password by running:
+kubectl get secret --namespace default my-release-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+
+# Get the Grafana URL to visit by running these commands in the same shell:
+export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/name=grafana,app.kubernetes.io/instance=my-release" -o jsonpath="{.items[0].metadata.name}")
+
+kubectl --namespace default port-forward $POD_NAME 3000
+```
+
+## How to connect Grafana to Prometheus?
+We need to add Prometheus as a data source in Grafana so that we can query and build beautiful dashboards in Grafana.
+
+### Note down IP address of Prometheus pod
+```
+echo $(kubectl get pods --namespace default -l "app=prometheus,component=server" -o jsonpath="{.items[0].metadata.name}")
+kubectl describe pod prometheus-server-<some random numbers> | grep IP
+```
+
+### Add Prometheus as a data source
+1. Open local Grafana by going to `http://localhost:3000/datasources`
+2. Click on "Add a new Data source" -> "Prometheus"
+3. Write `http://<PROMETHEUS POD IP ADDRESS>:9090` in HTTP -> URL section
+4. Click on `Save & test`. If everything is running smoothly then we will get message in green confirming that the data source is added.
