@@ -5,7 +5,9 @@ Technologies which we are planning to use are:
 - Grafana and Prometheus for observability
 - Kafka and RedPanda to store streaming data
 - Spark, Kafka Streams and Apache Ballista / Data Fusion to process data
-- Rust to read network packets and send this data to Kafka / RedPanda
+- Rust for data ingestion and data processing:
+ - We will write a Rust program to read network packets and send this data to Kafka / RedPanda
+ - We will write another program to fetch latest tweets
 
 ## Roadmap
 - Decide on which data sources we are going to use
